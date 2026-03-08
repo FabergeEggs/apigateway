@@ -1,0 +1,33 @@
+{
+    "version": 3,
+    "port": 8080,
+    "extra_config": {
+    	"github_com/devopsfaith/krakend-cors": {
+	"allow_origins": ["*"],
+	"allow_methods": ["GET", "POST", "PUT", "DELETE"],
+	"allow_headers": ["*"]
+	}
+    },
+    "endpoints": [
+        {
+        "endpoint": "/auth/",
+        "method": "GET",
+        "backend": [
+            {
+            "host": ["http://auth:8000"],
+            "url_pattern": "/auth/"
+            }
+        ]
+        },
+        {
+        "endpoint": "/project/",
+        "method": "GET",
+        "backend": [
+            {
+            "host": ["http://project:8000"],
+            "url_pattern": "/project/"
+            }
+        ]
+        }
+    ]
+}
