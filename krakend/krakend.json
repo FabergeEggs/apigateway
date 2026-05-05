@@ -6,20 +6,16 @@
         "github_com/devopsfaith/krakend-cors": {
             "allow_origins": ["http://localhost:3000"],
             "allow_methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-            "allow_headers": ["Content-Type", "Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
-            "expose_headers": ["X-User-Id", "X-Username", "X-User-Roles", "Set-Cookie"],
+            "allow_headers": ["Content-Type", "Authorization"],
+            "expose_headers": ["Set-Cookie"],
             "allow_credentials": true,
             "max_age": "12h"
-        },
-        "telemetry/logging": {
-            "level": "DEBUG",
-            "prefix": "[KRAKEND]",
-            "skip_paths": ["/health"]
         }
     },
     "timeout": "10s",
     "cache_ttl": "5m",
     "host": ["http://0.0.0.0:8080"],
+
     "endpoints": [
         {
             "endpoint": "/health",
@@ -32,7 +28,6 @@
                 }
             ]
         },
-
         {
             "endpoint": "/api/v1/auth/register",
             "method": "POST",
@@ -109,7 +104,14 @@
             "endpoint": "/api/v1/auth/logout-all",
             "method": "POST",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800
+                }
+            },
             "backend": [
                 {
                     "host": ["http://auth-service:8000"],
@@ -130,12 +132,23 @@
                 }
             ]
         },
-
         {
             "endpoint": "/profile/{user_id}",
             "method": "GET",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://profile-service:8000"],
@@ -148,7 +161,19 @@
             "endpoint": "/profile/{user_id}",
             "method": "PUT",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://profile-service:8000"],
@@ -161,7 +186,19 @@
             "endpoint": "/profile/{user_id}",
             "method": "DELETE",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://profile-service:8000"],
@@ -170,7 +207,6 @@
                 }
             ]
         },
-
         {
             "endpoint": "/project/health",
             "method": "GET",
@@ -187,7 +223,19 @@
             "endpoint": "/project",
             "method": "POST",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://project-service:8000"],
@@ -200,7 +248,19 @@
             "endpoint": "/project/batch",
             "method": "POST",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://project-service:8000"],
@@ -213,7 +273,19 @@
             "endpoint": "/project/{project_id}/info",
             "method": "GET",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://project-service:8000"],
@@ -226,7 +298,19 @@
             "endpoint": "/project/{project_id}/statistics",
             "method": "GET",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://project-service:8000"],
@@ -239,7 +323,19 @@
             "endpoint": "/project/{project_id}",
             "method": "PUT",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://project-service:8000"],
@@ -252,7 +348,19 @@
             "endpoint": "/project/{project_id}/task",
             "method": "POST",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://project-service:8000"],
@@ -265,7 +373,19 @@
             "endpoint": "/project/{project_id}/task/{task_id}",
             "method": "GET",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://project-service:8000"],
@@ -278,7 +398,19 @@
             "endpoint": "/project/{project_id}/task/{task_id}",
             "method": "PUT",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://project-service:8000"],
@@ -291,7 +423,19 @@
             "endpoint": "/project/{project_id}/post",
             "method": "POST",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://project-service:8000"],
@@ -304,7 +448,19 @@
             "endpoint": "/project/{project_id}/post/{post_id}",
             "method": "GET",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://project-service:8000"],
@@ -317,7 +473,19 @@
             "endpoint": "/project/{project_id}/post/{post_id}",
             "method": "PUT",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://project-service:8000"],
@@ -330,7 +498,19 @@
             "endpoint": "/project/{project_id}/post/{post_id}",
             "method": "DELETE",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://project-service:8000"],
@@ -343,7 +523,19 @@
             "endpoint": "/project/{project_id}/member",
             "method": "POST",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://project-service:8000"],
@@ -356,7 +548,19 @@
             "endpoint": "/project/{project_id}/member/{user_id}",
             "method": "DELETE",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://project-service:8000"],
@@ -369,7 +573,19 @@
             "endpoint": "/project/{project_id}/publications",
             "method": "GET",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://project-service:8000"],
@@ -382,7 +598,19 @@
             "endpoint": "/project/profile/{profile_id}",
             "method": "GET",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://project-service:8000"],
@@ -391,12 +619,23 @@
                 }
             ]
         },
-
         {
             "endpoint": "/api/v1/feed",
             "method": "GET",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://feed-service:4000"],
@@ -409,7 +648,19 @@
             "endpoint": "/api/v1/feed/project/{project_id}",
             "method": "GET",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://feed-service:4000"],
@@ -422,7 +673,19 @@
             "endpoint": "/api/v1/subscriptions",
             "method": "GET",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://feed-service:4000"],
@@ -435,7 +698,19 @@
             "endpoint": "/api/v1/subscriptions",
             "method": "POST",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://feed-service:4000"],
@@ -448,7 +723,19 @@
             "endpoint": "/api/v1/subscriptions/{id}",
             "method": "DELETE",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 1800,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://feed-service:4000"],
