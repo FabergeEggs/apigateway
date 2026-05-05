@@ -80,6 +80,7 @@
             "endpoint": "/api/v1/auth/refresh",
             "method": "POST",
             "output_encoding": "no-op",
+            "input_headers": ["Cookie", "Content-Type"],
             "backend": [
                 {
                     "host": ["http://auth-service:8000"],
@@ -92,6 +93,7 @@
             "endpoint": "/api/v1/auth/logout",
             "method": "POST",
             "output_encoding": "no-op",
+            "input_headers": ["Cookie", "Content-Type"],
             "backend": [
                 {
                     "host": ["http://auth-service:8000"],
