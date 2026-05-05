@@ -390,6 +390,72 @@
                     "encoding": "no-op"
                 }
             ]
+        },
+
+        {
+            "endpoint": "/api/v1/feed",
+            "method": "GET",
+            "output_encoding": "no-op",
+            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "backend": [
+                {
+                    "host": ["http://feed-service:4000"],
+                    "url_pattern": "/api/v1/feed",
+                    "encoding": "no-op"
+                }
+            ]
+        },
+        {
+            "endpoint": "/api/v1/feed/project/{project_id}",
+            "method": "GET",
+            "output_encoding": "no-op",
+            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "backend": [
+                {
+                    "host": ["http://feed-service:4000"],
+                    "url_pattern": "/api/v1/feed/project/{project_id}",
+                    "encoding": "no-op"
+                }
+            ]
+        },
+        {
+            "endpoint": "/api/v1/subscriptions",
+            "method": "GET",
+            "output_encoding": "no-op",
+            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "backend": [
+                {
+                    "host": ["http://feed-service:4000"],
+                    "url_pattern": "/api/v1/subscriptions",
+                    "encoding": "no-op"
+                }
+            ]
+        },
+        {
+            "endpoint": "/api/v1/subscriptions",
+            "method": "POST",
+            "output_encoding": "no-op",
+            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "backend": [
+                {
+                    "host": ["http://feed-service:4000"],
+                    "url_pattern": "/api/v1/subscriptions",
+                    "encoding": "no-op"
+                }
+            ]
+        },
+        {
+            "endpoint": "/api/v1/subscriptions/{id}",
+            "method": "DELETE",
+            "output_encoding": "no-op",
+            "input_headers": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "backend": [
+                {
+                    "host": ["http://feed-service:4000"],
+                    "url_pattern": "/api/v1/subscriptions/{id}",
+                    "encoding": "no-op"
+                }
+            ]
         }
     ]
 }
