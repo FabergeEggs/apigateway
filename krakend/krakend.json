@@ -3,10 +3,10 @@
     "port": 8080,
     "name": "API Gateway",
     "extra_config": {
-        "github_com/devopsfaith/krakend-cors": {
+        "security/cors": {
             "allow_origins": ["http://localhost:3000"],
             "allow_methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-            "allow_headers": ["Content-Type", "Authorization"],
+            "allow_headers": ["Origin", "Content-Type", "Authorization", "Accept", "X-Requested-With"],
             "expose_headers": ["Set-Cookie"],
             "allow_credentials": true,
             "max_age": "12h"
@@ -138,6 +138,14 @@
             "endpoint": "/profile/{user_id}",
             "method": "GET",
             "output_encoding": "no-op",
+            "input_headers": ["Authorization", "Content-Type"],
+            "headers_to_pass": [
+                "Authorization",
+                "Content-Type",
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
@@ -163,6 +171,14 @@
             "endpoint": "/profile/{user_id}",
             "method": "PUT",
             "output_encoding": "no-op",
+            "input_headers": ["Authorization", "Content-Type"],
+            "headers_to_pass": [
+                "Authorization",
+                "Content-Type",
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
@@ -188,6 +204,14 @@
             "endpoint": "/profile/{user_id}",
             "method": "DELETE",
             "output_encoding": "no-op",
+            "input_headers": ["Authorization", "Content-Type"],
+            "headers_to_pass": [
+                "Authorization",
+                "Content-Type",
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
@@ -212,8 +236,29 @@
         {
             "endpoint": "/project/health",
             "method": "GET",
-            "input_headers": ["Cookie", "Content-Type", "X-User-Id", "X-Username", "X-User-Roles"],
+            "input_headers": ["Authorization", "Content-Type"],
+            "headers_to_pass": [
+                "Authorization",
+                "Content-Type",
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "output_encoding": "no-op",
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "issuer": "http://localhost:8082/realms/myrealm",
+                    "cache": true,
+                    "cache_duration": 60,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access.roles", "X-User-Roles"]
+                    ]
+                }
+            },
             "backend": [
                 {
                     "host": ["http://project-service:8000"],
@@ -225,8 +270,19 @@
         {
             "endpoint": "/project",
             "method": "POST",
-            "input_headers": ["Cookie", "Content-Type", "X-User-Id", "X-Username", "X-User-Roles"],
             "output_encoding": "no-op",
+            "input_headers": [
+                "Authorization",
+                "Content-Type",
+                "Accept"
+            ],
+            "headers_to_pass": [
+                "Authorization",
+                "Content-Type",
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
@@ -251,12 +307,21 @@
         {
             "endpoint": "/project/batch",
             "method": "POST",
-            "input_headers": ["Cookie", "Content-Type", "X-User-Id", "X-Username", "X-User-Roles"],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
+            "headers_to_pass": [
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "output_encoding": "no-op",
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -277,12 +342,21 @@
         {
             "endpoint": "/project/{project_id}/info",
             "method": "GET",
-            "input_headers": ["Cookie", "Content-Type", "X-User-Id", "X-Username", "X-User-Roles"],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
+            "headers_to_pass": [
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "output_encoding": "no-op",
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -303,12 +377,21 @@
         {
             "endpoint": "/project/{project_id}/statistics",
             "method": "GET",
-            "input_headers": ["Cookie", "Content-Type", "X-User-Id", "X-Username", "X-User-Roles"],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
+            "headers_to_pass": [
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "output_encoding": "no-op",
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -329,12 +412,21 @@
         {
             "endpoint": "/project/{project_id}",
             "method": "PUT",
-            "input_headers": ["Cookie", "Content-Type", "X-User-Id", "X-Username", "X-User-Roles"],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
+            "headers_to_pass": [
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "output_encoding": "no-op",
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -355,12 +447,21 @@
         {
             "endpoint": "/project/{project_id}/task",
             "method": "POST",
-            "input_headers": ["Cookie", "Content-Type", "X-User-Id", "X-Username", "X-User-Roles"],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
+            "headers_to_pass": [
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "output_encoding": "no-op",
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -381,12 +482,21 @@
         {
             "endpoint": "/project/{project_id}/task/{task_id}",
             "method": "GET",
-            "input_headers": ["Cookie", "Content-Type", "X-User-Id", "X-Username", "X-User-Roles"],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
+            "headers_to_pass": [
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "output_encoding": "no-op",
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -406,13 +516,22 @@
         },
         {
             "endpoint": "/project/{project_id}/task/{task_id}",
-            "input_headers": ["Cookie", "Content-Type", "X-User-Id", "X-Username", "X-User-Roles"],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
+            "headers_to_pass": [
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "method": "PUT",
             "output_encoding": "no-op",
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -432,13 +551,22 @@
         },
         {
             "endpoint": "/project/{project_id}/post",
-            "input_headers": ["Cookie", "Content-Type", "X-User-Id", "X-Username", "X-User-Roles"],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
+            "headers_to_pass": [
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "method": "POST",
             "output_encoding": "no-op",
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -458,13 +586,22 @@
         },
         {
             "endpoint": "/project/{project_id}/post/{post_id}",
-            "input_headers": ["Cookie", "Content-Type", "X-User-Id", "X-Username", "X-User-Roles"],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
+            "headers_to_pass": [
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "method": "GET",
             "output_encoding": "no-op",
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -484,13 +621,22 @@
         },
         {
             "endpoint": "/project/{project_id}/post/{post_id}",
-            "input_headers": ["Cookie", "Content-Type", "X-User-Id", "X-Username", "X-User-Roles"],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
+            "headers_to_pass": [
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "method": "PUT",
             "output_encoding": "no-op",
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -510,13 +656,22 @@
         },
         {
             "endpoint": "/project/{project_id}/post/{post_id}",
-            "input_headers": ["Cookie", "Content-Type", "X-User-Id", "X-Username", "X-User-Roles"],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
+            "headers_to_pass": [
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "method": "DELETE",
             "output_encoding": "no-op",
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -536,13 +691,22 @@
         },
         {
             "endpoint": "/project/{project_id}/member",
-            "input_headers": ["Cookie", "Content-Type", "X-User-Id", "X-Username", "X-User-Roles"],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
+            "headers_to_pass": [
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "method": "POST",
             "output_encoding": "no-op",
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -562,13 +726,22 @@
         },
         {
             "endpoint": "/project/{project_id}/member/{user_id}",
-            "input_headers": ["Cookie", "Content-Type", "X-User-Id", "X-Username", "X-User-Roles"],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
+            "headers_to_pass": [
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "method": "DELETE",
             "output_encoding": "no-op",
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -588,13 +761,22 @@
         },
         {
             "endpoint": "/project/{project_id}/publications",
-            "input_headers": ["Cookie", "Content-Type", "X-User-Id", "X-Username", "X-User-Roles"],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
+            "headers_to_pass": [
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "method": "GET",
             "output_encoding": "no-op",
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -614,13 +796,22 @@
         },
         {
             "endpoint": "/project/profile/{profile_id}",
-            "input_headers": ["Cookie", "Content-Type", "X-User-Id", "X-Username", "X-User-Roles"],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
+            "headers_to_pass": [
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "method": "GET",
             "output_encoding": "no-op",
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
