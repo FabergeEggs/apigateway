@@ -155,7 +155,7 @@
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -188,7 +188,7 @@
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -221,7 +221,7 @@
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -249,13 +249,13 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:8082/realms/myrealm",
+                    "issuer": "http://localhost:3000/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -287,12 +287,13 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "issuer": "http://localhost:3000/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -321,13 +322,13 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:8082/realms/myrealm",
+                    "issuer": "http://localhost:3000/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -356,13 +357,13 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:8082/realms/myrealm",
+                    "issuer": "http://localhost:3000/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -391,13 +392,13 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:8082/realms/myrealm",
+                    "issuer": "http://localhost:3000/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -426,13 +427,13 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:8082/realms/myrealm",
+                    "issuer": "http://localhost:3000/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -461,13 +462,13 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:8082/realms/myrealm",
+                    "issuer": "http://localhost:3000/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -496,13 +497,13 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:8082/realms/myrealm",
+                    "issuer": "http://localhost:3000/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -531,13 +532,13 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:8082/realms/myrealm",
+                    "issuer": "http://localhost:3000/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -566,13 +567,13 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:8082/realms/myrealm",
+                    "issuer": "http://localhost:3000/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -601,13 +602,13 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:8082/realms/myrealm",
+                    "issuer": "http://localhost:3000/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -636,13 +637,13 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:8082/realms/myrealm",
+                    "issuer": "http://localhost:3000/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -671,13 +672,13 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:8082/realms/myrealm",
+                    "issuer": "http://localhost:3000/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -706,13 +707,13 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:8082/realms/myrealm",
+                    "issuer": "http://localhost:3000/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -741,13 +742,13 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:8082/realms/myrealm",
+                    "issuer": "http://localhost:3000/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -776,13 +777,13 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:8082/realms/myrealm",
+                    "issuer": "http://localhost:3000/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -811,13 +812,13 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:8082/realms/myrealm",
+                    "issuer": "http://localhost:3000/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -854,7 +855,7 @@
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -879,7 +880,7 @@
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -904,7 +905,7 @@
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -929,7 +930,7 @@
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -954,7 +955,7 @@
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -979,7 +980,7 @@
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -1004,7 +1005,7 @@
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -1029,7 +1030,7 @@
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -1054,7 +1055,7 @@
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
@@ -1079,7 +1080,7 @@
                     "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
-                        ["realm_access.roles", "X-User-Roles"]
+                        ["realm_access/roles", "X-User-Roles"]
                     ]
                 }
             },
