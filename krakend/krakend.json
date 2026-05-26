@@ -249,7 +249,7 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:3000/realms/myrealm",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -287,7 +287,7 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:3000/realms/myrealm",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -322,7 +322,7 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:3000/realms/myrealm",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -357,7 +357,7 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:3000/realms/myrealm",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -392,7 +392,7 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:3000/realms/myrealm",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -427,7 +427,7 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:3000/realms/myrealm",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -462,7 +462,7 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:3000/realms/myrealm",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -497,7 +497,7 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:3000/realms/myrealm",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -532,7 +532,7 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:3000/realms/myrealm",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -567,7 +567,7 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:3000/realms/myrealm",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -602,7 +602,7 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:3000/realms/myrealm",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -637,7 +637,7 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:3000/realms/myrealm",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -672,7 +672,7 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:3000/realms/myrealm",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -707,7 +707,7 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:3000/realms/myrealm",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -742,7 +742,7 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:3000/realms/myrealm",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -777,7 +777,7 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:3000/realms/myrealm",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -812,7 +812,7 @@
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
                     "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "issuer": "http://localhost:3000/realms/myrealm",
+                    "issuer": "http://localhost:8082/realms/myrealm",
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
@@ -843,31 +843,6 @@
             ]
         },
         {
-            "endpoint": "/api/v1/feed",
-            "method": "GET",
-            "output_encoding": "no-op",
-            "extra_config": {
-                "github_com/devopsfaith/krakend-jose/validator": {
-                    "alg": "RS256",
-                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "cache": true,
-                    "cache_duration": 60,
-                    "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
-                    ]
-                }
-            },
-            "backend": [
-                {
-                    "host": ["http://feed-service:4000"],
-                    "url_pattern": "/api/v1/feed",
-                    "encoding": "no-op"
-                }
-            ]
-        },
-        {
             "endpoint": "/api/v1/feed/projects/{project_id}",
             "method": "GET",
             "output_encoding": "no-op",
@@ -888,56 +863,6 @@
                 {
                     "host": ["http://feed-service:4000"],
                     "url_pattern": "/api/v1/feed/projects/{project_id}",
-                    "encoding": "no-op"
-                }
-            ]
-        },
-        {
-            "endpoint": "/api/v1/subscriptions",
-            "method": "GET",
-            "output_encoding": "no-op",
-            "extra_config": {
-                "github_com/devopsfaith/krakend-jose/validator": {
-                    "alg": "RS256",
-                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "cache": true,
-                    "cache_duration": 60,
-                    "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
-                    ]
-                }
-            },
-            "backend": [
-                {
-                    "host": ["http://feed-service:4000"],
-                    "url_pattern": "/api/v1/subscriptions",
-                    "encoding": "no-op"
-                }
-            ]
-        },
-        {
-            "endpoint": "/api/v1/subscriptions",
-            "method": "POST",
-            "output_encoding": "no-op",
-            "extra_config": {
-                "github_com/devopsfaith/krakend-jose/validator": {
-                    "alg": "RS256",
-                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "cache": true,
-                    "cache_duration": 60,
-                    "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
-                    ]
-                }
-            },
-            "backend": [
-                {
-                    "host": ["http://feed-service:4000"],
-                    "url_pattern": "/api/v1/subscriptions",
                     "encoding": "no-op"
                 }
             ]
@@ -1063,31 +988,6 @@
                 {
                     "host": ["http://media-service:8000"],
                     "url_pattern": "/api/v1/me/assets/{asset_id}",
-                    "encoding": "no-op"
-                }
-            ]
-        },
-        {
-            "endpoint": "/api/v1/subscriptions/{id}",
-            "method": "DELETE",
-            "output_encoding": "no-op",
-            "extra_config": {
-                "github_com/devopsfaith/krakend-jose/validator": {
-                    "alg": "RS256",
-                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
-                    "cache": true,
-                    "cache_duration": 60,
-                    "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
-                    ]
-                }
-            },
-            "backend": [
-                {
-                    "host": ["http://feed-service:4000"],
-                    "url_pattern": "/api/v1/subscriptions/{id}",
                     "encoding": "no-op"
                 }
             ]
