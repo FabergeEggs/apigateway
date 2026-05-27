@@ -871,6 +871,8 @@
             "endpoint": "/api/v1/media/me/uploads",
             "method": "POST",
             "output_encoding": "no-op",
+            "input_headers": ["Authorization", "Content-Type"],
+            "headers_to_pass": ["Authorization", "Content-Type", "X-User-Id", "X-Username", "X-User-Roles"],
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
@@ -896,6 +898,8 @@
             "endpoint": "/api/v1/media/me/uploads/{upload_id}/complete",
             "method": "POST",
             "output_encoding": "no-op",
+            "input_headers": ["Authorization", "Content-Type"],
+            "headers_to_pass": ["Authorization", "Content-Type", "X-User-Id", "X-Username", "X-User-Roles"],
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
@@ -918,9 +922,25 @@
             ]
         },
         {
+            "endpoint": "/api/v1/media/me/uploads/{upload_id}/data",
+            "method": "PUT",
+            "output_encoding": "no-op",
+            "input_headers": ["Content-Type"],
+            "headers_to_pass": ["Content-Type"],
+            "backend": [
+                {
+                    "host": ["http://media-service:8000"],
+                    "url_pattern": "/api/v1/me/uploads/{upload_id}/data",
+                    "encoding": "no-op"
+                }
+            ]
+        },
+        {
             "endpoint": "/api/v1/media/me/assets",
             "method": "GET",
             "output_encoding": "no-op",
+            "input_headers": ["Authorization"],
+            "headers_to_pass": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
@@ -946,6 +966,8 @@
             "endpoint": "/api/v1/media/me/assets/{asset_id}",
             "method": "GET",
             "output_encoding": "no-op",
+            "input_headers": ["Authorization"],
+            "headers_to_pass": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
@@ -971,6 +993,8 @@
             "endpoint": "/api/v1/media/me/assets/{asset_id}",
             "method": "DELETE",
             "output_encoding": "no-op",
+            "input_headers": ["Authorization"],
+            "headers_to_pass": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
@@ -988,6 +1012,118 @@
                 {
                     "host": ["http://media-service:8000"],
                     "url_pattern": "/api/v1/me/assets/{asset_id}",
+                    "encoding": "no-op"
+                }
+            ]
+        },
+        {
+            "endpoint": "/project/{project_id}/task/{task_id}/responses",
+            "method": "POST",
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
+            "headers_to_pass": [
+                "Authorization",
+                "Content-Type",
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
+            "output_encoding": "no-op",
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "issuer": "http://localhost:8082/realms/myrealm",
+                    "cache": true,
+                    "cache_duration": 60,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access/roles", "X-User-Roles"]
+                    ]
+                }
+            },
+            "backend": [
+                {
+                    "host": ["http://response-service:8000"],
+                    "url_pattern": "/response/tasks/{task_id}/responses?project_id={project_id}",
+                    "encoding": "no-op"
+                }
+            ]
+        },
+        {
+            "endpoint": "/project/{project_id}/task/{task_id}/responses/{response_id}/status",
+            "method": "PATCH",
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
+            "headers_to_pass": [
+                "Authorization",
+                "Content-Type",
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
+            "output_encoding": "no-op",
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "issuer": "http://localhost:8082/realms/myrealm",
+                    "cache": true,
+                    "cache_duration": 60,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access/roles", "X-User-Roles"]
+                    ]
+                }
+            },
+            "backend": [
+                {
+                    "host": ["http://response-service:8000"],
+                    "url_pattern": "/response/responses/{response_id}/status",
+                    "encoding": "no-op",
+                    "method": "PATCH"
+                }
+            ]
+        },
+        {
+            "endpoint": "/project/{project_id}/task/{task_id}/responses",
+            "method": "GET",
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
+            "headers_to_pass": [
+                "Authorization",
+                "Content-Type",
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
+            "output_encoding": "no-op",
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "issuer": "http://localhost:8082/realms/myrealm",
+                    "cache": true,
+                    "cache_duration": 60,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access/roles", "X-User-Roles"]
+                    ]
+                }
+            },
+            "backend": [
+                {
+                    "host": ["http://response-service:8000"],
+                    "url_pattern": "/response/responses?task_id={task_id}&project_id={project_id}",
                     "encoding": "no-op"
                 }
             ]
