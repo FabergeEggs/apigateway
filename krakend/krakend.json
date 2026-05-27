@@ -90,6 +90,19 @@
             ]
         },
         {
+            "endpoint": "/api/v1/auth/password-change",
+            "method": "POST",
+            "output_encoding": "no-op",
+            "input_headers": ["Authorization", "Cookie", "Content-Type"],
+            "backend": [
+                {
+                    "host": ["http://auth-service:8000"],
+                    "url_pattern": "/api/v1/auth/password-change",
+                    "encoding": "no-op"
+                }
+            ]
+        },
+        {
             "endpoint": "/api/v1/auth/logout",
             "method": "POST",
             "output_encoding": "no-op",
@@ -834,6 +847,7 @@
             "endpoint": "/api/v1/responses",
             "method": "GET",
             "output_encoding": "no-op",
+            "input_query_strings": ["task_id"],
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
@@ -850,8 +864,9 @@
             "backend": [
                 {
                     "host": ["http://response-service:8000"],
-                    "url_pattern": "/responses",
-                    "encoding": "no-op"
+                    "url_pattern": "/response/responses",
+                    "encoding": "no-op",
+                    "querystring_params_passthrough": ["task_id"]
                 }
             ]
         },
@@ -875,7 +890,7 @@
             "backend": [
                 {
                     "host": ["http://response-service:8000"],
-                    "url_pattern": "/responses/{response_id}",
+                    "url_pattern": "/response/responses/{response_id}",
                     "encoding": "no-op"
                 }
             ]
@@ -900,7 +915,7 @@
             "backend": [
                 {
                     "host": ["http://response-service:8000"],
-                    "url_pattern": "/responses",
+                    "url_pattern": "/response/responses",
                     "encoding": "no-op"
                 }
             ]
@@ -925,7 +940,7 @@
             "backend": [
                 {
                     "host": ["http://response-service:8000"],
-                    "url_pattern": "/responses/{response_id}",
+                    "url_pattern": "/response/responses/{response_id}",
                     "encoding": "no-op"
                 }
             ]
@@ -950,7 +965,7 @@
             "backend": [
                 {
                     "host": ["http://response-service:8000"],
-                    "url_pattern": "/responses/{response_id}",
+                    "url_pattern": "/response/responses/{response_id}",
                     "encoding": "no-op"
                 }
             ]
@@ -975,7 +990,7 @@
             "backend": [
                 {
                     "host": ["http://response-service:8000"],
-                    "url_pattern": "/responses/{response_id}/status",
+                    "url_pattern": "/response/responses/{response_id}/status",
                     "encoding": "no-op"
                 }
             ]
@@ -1000,7 +1015,7 @@
             "backend": [
                 {
                     "host": ["http://response-service:8000"],
-                    "url_pattern": "/responses/{response_id}/comments",
+                    "url_pattern": "/response/posts/{response_id}/comments",
                     "encoding": "no-op"
                 }
             ]
@@ -1025,7 +1040,7 @@
             "backend": [
                 {
                     "host": ["http://response-service:8000"],
-                    "url_pattern": "/responses/{response_id}/comments",
+                    "url_pattern": "/response/posts/{response_id}/comments",
                     "encoding": "no-op"
                 }
             ]
@@ -1050,7 +1065,7 @@
             "backend": [
                 {
                     "host": ["http://response-service:8000"],
-                    "url_pattern": "/comments/{comment_id}",
+                    "url_pattern": "/response/comments/{comment_id}",
                     "encoding": "no-op"
                 }
             ]
@@ -1075,7 +1090,7 @@
             "backend": [
                 {
                     "host": ["http://response-service:8000"],
-                    "url_pattern": "/comments/{comment_id}",
+                    "url_pattern": "/response/comments/{comment_id}",
                     "encoding": "no-op"
                 }
             ]
@@ -1100,7 +1115,7 @@
             "backend": [
                 {
                     "host": ["http://response-service:8000"],
-                    "url_pattern": "/responses/{response_id}/files",
+                    "url_pattern": "/response/responses/{response_id}/files",
                     "encoding": "no-op"
                 }
             ]
@@ -1125,7 +1140,7 @@
             "backend": [
                 {
                     "host": ["http://response-service:8000"],
-                    "url_pattern": "/responses/{response_id}/files/{file_id}",
+                    "url_pattern": "/response/responses/{response_id}/files/{file_id}",
                     "encoding": "no-op"
                 }
             ]
@@ -1150,7 +1165,7 @@
             "backend": [
                 {
                     "host": ["http://response-service:8000"],
-                    "url_pattern": "/responses/{response_id}/files/{file_id}",
+                    "url_pattern": "/response/responses/{response_id}/files/{file_id}",
                     "encoding": "no-op"
                 }
             ]
@@ -1413,6 +1428,333 @@
                 {
                     "host": ["http://feed-service:4000"],
                     "url_pattern": "/api/v1/subscriptions/{id}",
+                    "encoding": "no-op"
+                }
+            ]
+        },
+        {
+            "endpoint": "/response/responses",
+            "method": "GET",
+            "output_encoding": "no-op",
+            "input_query_strings": ["task_id"],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 60,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access/roles", "X-User-Roles"]
+                    ]
+                }
+            },
+            "backend": [
+                {
+                    "host": ["http://response-service:8000"],
+                    "url_pattern": "/response/responses",
+                    "encoding": "no-op",
+                    "querystring_params_passthrough": ["task_id"]
+                }
+            ]
+        },
+        {
+            "endpoint": "/response/responses",
+            "method": "POST",
+            "output_encoding": "no-op",
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 60,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access/roles", "X-User-Roles"]
+                    ]
+                }
+            },
+            "backend": [
+                {
+                    "host": ["http://response-service:8000"],
+                    "url_pattern": "/response/responses",
+                    "encoding": "no-op"
+                }
+            ]
+        },
+        {
+            "endpoint": "/response/responses/{response_id}",
+            "method": "GET",
+            "output_encoding": "no-op",
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 60,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access/roles", "X-User-Roles"]
+                    ]
+                }
+            },
+            "backend": [
+                {
+                    "host": ["http://response-service:8000"],
+                    "url_pattern": "/response/responses/{response_id}",
+                    "encoding": "no-op"
+                }
+            ]
+        },
+        {
+            "endpoint": "/response/responses/{response_id}",
+            "method": "PUT",
+            "output_encoding": "no-op",
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 60,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access/roles", "X-User-Roles"]
+                    ]
+                }
+            },
+            "backend": [
+                {
+                    "host": ["http://response-service:8000"],
+                    "url_pattern": "/response/responses/{response_id}",
+                    "encoding": "no-op"
+                }
+            ]
+        },
+        {
+            "endpoint": "/response/responses/{response_id}",
+            "method": "DELETE",
+            "output_encoding": "no-op",
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 60,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access/roles", "X-User-Roles"]
+                    ]
+                }
+            },
+            "backend": [
+                {
+                    "host": ["http://response-service:8000"],
+                    "url_pattern": "/response/responses/{response_id}",
+                    "encoding": "no-op"
+                }
+            ]
+        },
+        {
+            "endpoint": "/response/responses/{response_id}/status",
+            "method": "PATCH",
+            "output_encoding": "no-op",
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 60,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access/roles", "X-User-Roles"]
+                    ]
+                }
+            },
+            "backend": [
+                {
+                    "host": ["http://response-service:8000"],
+                    "url_pattern": "/response/responses/{response_id}/status",
+                    "encoding": "no-op"
+                }
+            ]
+        },
+        {
+            "endpoint": "/response/posts/{post_id}/comments",
+            "method": "GET",
+            "output_encoding": "no-op",
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 60,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access/roles", "X-User-Roles"]
+                    ]
+                }
+            },
+            "backend": [
+                {
+                    "host": ["http://response-service:8000"],
+                    "url_pattern": "/response/posts/{post_id}/comments",
+                    "encoding": "no-op"
+                }
+            ]
+        },
+        {
+            "endpoint": "/response/posts/{post_id}/comments",
+            "method": "POST",
+            "output_encoding": "no-op",
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 60,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access/roles", "X-User-Roles"]
+                    ]
+                }
+            },
+            "backend": [
+                {
+                    "host": ["http://response-service:8000"],
+                    "url_pattern": "/response/posts/{post_id}/comments",
+                    "encoding": "no-op"
+                }
+            ]
+        },
+        {
+            "endpoint": "/response/comments/{comment_id}",
+            "method": "GET",
+            "output_encoding": "no-op",
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 60,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access/roles", "X-User-Roles"]
+                    ]
+                }
+            },
+            "backend": [
+                {
+                    "host": ["http://response-service:8000"],
+                    "url_pattern": "/response/comments/{comment_id}",
+                    "encoding": "no-op"
+                }
+            ]
+        },
+        {
+            "endpoint": "/response/comments/{comment_id}",
+            "method": "DELETE",
+            "output_encoding": "no-op",
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 60,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access/roles", "X-User-Roles"]
+                    ]
+                }
+            },
+            "backend": [
+                {
+                    "host": ["http://response-service:8000"],
+                    "url_pattern": "/response/comments/{comment_id}",
+                    "encoding": "no-op"
+                }
+            ]
+        },
+        {
+            "endpoint": "/response/responses/{response_id}/files",
+            "method": "POST",
+            "output_encoding": "no-op",
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 60,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access/roles", "X-User-Roles"]
+                    ]
+                }
+            },
+            "backend": [
+                {
+                    "host": ["http://response-service:8000"],
+                    "url_pattern": "/response/responses/{response_id}/files",
+                    "encoding": "no-op"
+                }
+            ]
+        },
+        {
+            "endpoint": "/response/responses/{response_id}/files/{file_id}",
+            "method": "GET",
+            "output_encoding": "no-op",
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 60,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access/roles", "X-User-Roles"]
+                    ]
+                }
+            },
+            "backend": [
+                {
+                    "host": ["http://response-service:8000"],
+                    "url_pattern": "/response/responses/{response_id}/files/{file_id}",
+                    "encoding": "no-op"
+                }
+            ]
+        },
+        {
+            "endpoint": "/response/responses/{response_id}/files/{file_id}",
+            "method": "DELETE",
+            "output_encoding": "no-op",
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "cache": true,
+                    "cache_duration": 60,
+                    "propagate_claims": [
+                        ["sub", "X-User-Id"],
+                        ["preferred_username", "X-Username"],
+                        ["realm_access/roles", "X-User-Roles"]
+                    ]
+                }
+            },
+            "backend": [
+                {
+                    "host": ["http://response-service:8000"],
+                    "url_pattern": "/response/responses/{response_id}/files/{file_id}",
                     "encoding": "no-op"
                 }
             ]
