@@ -4,18 +4,36 @@
     "name": "API Gateway",
     "extra_config": {
         "security/cors": {
-            "allow_origins": ["http://localhost:3000"],
-            "allow_methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-            "allow_headers": ["Origin", "Content-Type", "Authorization", "Accept", "X-Requested-With"],
-            "expose_headers": ["Set-Cookie"],
+            "allow_origins": [
+                "http://localhost:3000"
+            ],
+            "allow_methods": [
+                "GET",
+                "POST",
+                "PUT",
+                "DELETE",
+                "PATCH",
+                "OPTIONS"
+            ],
+            "allow_headers": [
+                "Origin",
+                "Content-Type",
+                "Authorization",
+                "Accept",
+                "X-Requested-With"
+            ],
+            "expose_headers": [
+                "Set-Cookie"
+            ],
             "allow_credentials": true,
             "max_age": "12h"
         }
     },
     "timeout": "10s",
     "cache_ttl": "5m",
-    "host": ["http://0.0.0.0:8080"],
-
+    "host": [
+        "http://0.0.0.0:8080"
+    ],
     "endpoints": [
         {
             "endpoint": "/health",
@@ -23,7 +41,9 @@
             "output_encoding": "no-op",
             "backend": [
                 {
-                    "host": ["http://auth-service:8000"],
+                    "host": [
+                        "http://auth-service:8000"
+                    ],
                     "url_pattern": "/health"
                 }
             ]
@@ -34,7 +54,9 @@
             "output_encoding": "no-op",
             "backend": [
                 {
-                    "host": ["http://auth-service:8000"],
+                    "host": [
+                        "http://auth-service:8000"
+                    ],
                     "url_pattern": "/api/v1/auth/register",
                     "encoding": "no-op"
                 }
@@ -46,7 +68,9 @@
             "output_encoding": "no-op",
             "backend": [
                 {
-                    "host": ["http://auth-service:8000"],
+                    "host": [
+                        "http://auth-service:8000"
+                    ],
                     "url_pattern": "/api/v1/auth/login",
                     "encoding": "no-op"
                 }
@@ -58,7 +82,9 @@
             "output_encoding": "no-op",
             "backend": [
                 {
-                    "host": ["http://auth-service:8000"],
+                    "host": [
+                        "http://auth-service:8000"
+                    ],
                     "url_pattern": "/api/v1/auth/forgot-password",
                     "encoding": "no-op"
                 }
@@ -70,7 +96,9 @@
             "output_encoding": "no-op",
             "backend": [
                 {
-                    "host": ["http://auth-service:8000"],
+                    "host": [
+                        "http://auth-service:8000"
+                    ],
                     "url_pattern": "/api/v1/auth/reset-password",
                     "encoding": "no-op"
                 }
@@ -80,10 +108,15 @@
             "endpoint": "/api/v1/auth/refresh",
             "method": "POST",
             "output_encoding": "no-op",
-            "input_headers": ["Cookie", "Content-Type"],
+            "input_headers": [
+                "Cookie",
+                "Content-Type"
+            ],
             "backend": [
                 {
-                    "host": ["http://auth-service:8000"],
+                    "host": [
+                        "http://auth-service:8000"
+                    ],
                     "url_pattern": "/api/v1/auth/refresh",
                     "encoding": "no-op"
                 }
@@ -93,10 +126,15 @@
             "endpoint": "/api/v1/auth/logout",
             "method": "POST",
             "output_encoding": "no-op",
-            "input_headers": ["Cookie", "Content-Type"],
+            "input_headers": [
+                "Cookie",
+                "Content-Type"
+            ],
             "backend": [
                 {
-                    "host": ["http://auth-service:8000"],
+                    "host": [
+                        "http://auth-service:8000"
+                    ],
                     "url_pattern": "/api/v1/auth/logout",
                     "encoding": "no-op"
                 }
@@ -116,7 +154,9 @@
             },
             "backend": [
                 {
-                    "host": ["http://auth-service:8000"],
+                    "host": [
+                        "http://auth-service:8000"
+                    ],
                     "url_pattern": "/api/v1/auth/logout-all",
                     "encoding": "no-op"
                 }
@@ -128,7 +168,9 @@
             "output_encoding": "no-op",
             "backend": [
                 {
-                    "host": ["http://auth-service:8000"],
+                    "host": [
+                        "http://auth-service:8000"
+                    ],
                     "url_pattern": "/api/v1/auth/verify-email",
                     "encoding": "no-op"
                 }
@@ -138,7 +180,10 @@
             "endpoint": "/profile/{user_id}",
             "method": "GET",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "Content-Type"],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
             "headers_to_pass": [
                 "Authorization",
                 "Content-Type",
@@ -153,15 +198,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://profile-service:8000"],
+                    "host": [
+                        "http://profile-service:8000"
+                    ],
                     "url_pattern": "/profile/{user_id}",
                     "encoding": "no-op"
                 }
@@ -171,7 +227,10 @@
             "endpoint": "/profile/{user_id}",
             "method": "PUT",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "Content-Type"],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
             "headers_to_pass": [
                 "Authorization",
                 "Content-Type",
@@ -186,15 +245,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://profile-service:8000"],
+                    "host": [
+                        "http://profile-service:8000"
+                    ],
                     "url_pattern": "/profile/{user_id}",
                     "encoding": "no-op"
                 }
@@ -204,7 +274,10 @@
             "endpoint": "/profile/{user_id}",
             "method": "DELETE",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "Content-Type"],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
             "headers_to_pass": [
                 "Authorization",
                 "Content-Type",
@@ -219,15 +292,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://profile-service:8000"],
+                    "host": [
+                        "http://profile-service:8000"
+                    ],
                     "url_pattern": "/profile/{user_id}",
                     "encoding": "no-op"
                 }
@@ -236,7 +320,10 @@
         {
             "endpoint": "/project/health",
             "method": "GET",
-            "input_headers": ["Authorization", "Content-Type"],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
             "headers_to_pass": [
                 "Authorization",
                 "Content-Type",
@@ -253,15 +340,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://project-service:8000"],
+                    "host": [
+                        "http://project-service:8000"
+                    ],
                     "url_pattern": "/project/health",
                     "encoding": "no-op"
                 }
@@ -291,15 +389,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://project-service:8000"],
+                    "host": [
+                        "http://project-service:8000"
+                    ],
                     "url_pattern": "/project",
                     "encoding": "no-op"
                 }
@@ -326,15 +435,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://project-service:8000"],
+                    "host": [
+                        "http://project-service:8000"
+                    ],
                     "url_pattern": "/project/batch",
                     "encoding": "no-op"
                 }
@@ -361,15 +481,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://project-service:8000"],
+                    "host": [
+                        "http://project-service:8000"
+                    ],
                     "url_pattern": "/project/{project_id}/info",
                     "encoding": "no-op"
                 }
@@ -396,15 +527,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://project-service:8000"],
+                    "host": [
+                        "http://project-service:8000"
+                    ],
                     "url_pattern": "/project/{project_id}/statistics",
                     "encoding": "no-op"
                 }
@@ -431,15 +573,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://project-service:8000"],
+                    "host": [
+                        "http://project-service:8000"
+                    ],
                     "url_pattern": "/project/{project_id}",
                     "encoding": "no-op"
                 }
@@ -466,15 +619,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://project-service:8000"],
+                    "host": [
+                        "http://project-service:8000"
+                    ],
                     "url_pattern": "/project/{project_id}/task",
                     "encoding": "no-op"
                 }
@@ -501,15 +665,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://project-service:8000"],
+                    "host": [
+                        "http://project-service:8000"
+                    ],
                     "url_pattern": "/project/{project_id}/task/{task_id}",
                     "encoding": "no-op"
                 }
@@ -536,15 +711,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://project-service:8000"],
+                    "host": [
+                        "http://project-service:8000"
+                    ],
                     "url_pattern": "/project/{project_id}/task/{task_id}",
                     "encoding": "no-op"
                 }
@@ -571,15 +757,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://project-service:8000"],
+                    "host": [
+                        "http://project-service:8000"
+                    ],
                     "url_pattern": "/project/{project_id}/post",
                     "encoding": "no-op"
                 }
@@ -606,15 +803,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://project-service:8000"],
+                    "host": [
+                        "http://project-service:8000"
+                    ],
                     "url_pattern": "/project/{project_id}/post/{post_id}",
                     "encoding": "no-op"
                 }
@@ -641,15 +849,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://project-service:8000"],
+                    "host": [
+                        "http://project-service:8000"
+                    ],
                     "url_pattern": "/project/{project_id}/post/{post_id}",
                     "encoding": "no-op"
                 }
@@ -676,15 +895,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://project-service:8000"],
+                    "host": [
+                        "http://project-service:8000"
+                    ],
                     "url_pattern": "/project/{project_id}/post/{post_id}",
                     "encoding": "no-op"
                 }
@@ -711,15 +941,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://project-service:8000"],
+                    "host": [
+                        "http://project-service:8000"
+                    ],
                     "url_pattern": "/project/{project_id}/member",
                     "encoding": "no-op"
                 }
@@ -746,15 +987,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://project-service:8000"],
+                    "host": [
+                        "http://project-service:8000"
+                    ],
                     "url_pattern": "/project/{project_id}/member/{user_id}",
                     "encoding": "no-op"
                 }
@@ -781,15 +1033,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://project-service:8000"],
+                    "host": [
+                        "http://project-service:8000"
+                    ],
                     "url_pattern": "/project/{project_id}/publications",
                     "encoding": "no-op"
                 }
@@ -816,15 +1079,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://project-service:8000"],
+                    "host": [
+                        "http://project-service:8000"
+                    ],
                     "url_pattern": "/project/profile/{profile_id}",
                     "encoding": "no-op"
                 }
@@ -836,7 +1110,9 @@
             "output_encoding": "no-op",
             "backend": [
                 {
-                    "host": ["http://feed-service:4000"],
+                    "host": [
+                        "http://feed-service:4000"
+                    ],
                     "url_pattern": "/api/v1/feed/global",
                     "encoding": "no-op"
                 }
@@ -853,15 +1129,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://feed-service:4000"],
+                    "host": [
+                        "http://feed-service:4000"
+                    ],
                     "url_pattern": "/api/v1/feed/projects/{project_id}",
                     "encoding": "no-op"
                 }
@@ -871,8 +1158,17 @@
             "endpoint": "/api/v1/media/me/uploads",
             "method": "POST",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "Content-Type"],
-            "headers_to_pass": ["Authorization", "Content-Type", "X-User-Id", "X-Username", "X-User-Roles"],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
+            "headers_to_pass": [
+                "Authorization",
+                "Content-Type",
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
@@ -880,15 +1176,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://media-service:8000"],
+                    "host": [
+                        "http://media-service:8000"
+                    ],
                     "url_pattern": "/api/v1/me/uploads",
                     "encoding": "no-op"
                 }
@@ -898,8 +1205,17 @@
             "endpoint": "/api/v1/media/me/uploads/{upload_id}/complete",
             "method": "POST",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization", "Content-Type"],
-            "headers_to_pass": ["Authorization", "Content-Type", "X-User-Id", "X-Username", "X-User-Roles"],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
+            "headers_to_pass": [
+                "Authorization",
+                "Content-Type",
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
@@ -907,15 +1223,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://media-service:8000"],
+                    "host": [
+                        "http://media-service:8000"
+                    ],
                     "url_pattern": "/api/v1/me/uploads/{upload_id}/complete",
                     "encoding": "no-op"
                 }
@@ -925,11 +1252,17 @@
             "endpoint": "/api/v1/media/me/uploads/{upload_id}/data",
             "method": "PUT",
             "output_encoding": "no-op",
-            "input_headers": ["Content-Type"],
-            "headers_to_pass": ["Content-Type"],
+            "input_headers": [
+                "Content-Type"
+            ],
+            "headers_to_pass": [
+                "Content-Type"
+            ],
             "backend": [
                 {
-                    "host": ["http://media-service:8000"],
+                    "host": [
+                        "http://media-service:8000"
+                    ],
                     "url_pattern": "/api/v1/me/uploads/{upload_id}/data",
                     "encoding": "no-op"
                 }
@@ -939,8 +1272,15 @@
             "endpoint": "/api/v1/media/me/assets",
             "method": "GET",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization"],
-            "headers_to_pass": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "input_headers": [
+                "Authorization"
+            ],
+            "headers_to_pass": [
+                "Authorization",
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
@@ -948,15 +1288,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://media-service:8000"],
+                    "host": [
+                        "http://media-service:8000"
+                    ],
                     "url_pattern": "/api/v1/me/assets",
                     "encoding": "no-op"
                 }
@@ -966,8 +1317,15 @@
             "endpoint": "/api/v1/media/me/assets/{asset_id}",
             "method": "GET",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization"],
-            "headers_to_pass": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "input_headers": [
+                "Authorization"
+            ],
+            "headers_to_pass": [
+                "Authorization",
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
@@ -975,15 +1333,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://media-service:8000"],
+                    "host": [
+                        "http://media-service:8000"
+                    ],
                     "url_pattern": "/api/v1/me/assets/{asset_id}",
                     "encoding": "no-op"
                 }
@@ -993,8 +1362,15 @@
             "endpoint": "/api/v1/media/me/assets/{asset_id}",
             "method": "DELETE",
             "output_encoding": "no-op",
-            "input_headers": ["Authorization"],
-            "headers_to_pass": ["Authorization", "X-User-Id", "X-Username", "X-User-Roles"],
+            "input_headers": [
+                "Authorization"
+            ],
+            "headers_to_pass": [
+                "Authorization",
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
             "extra_config": {
                 "github_com/devopsfaith/krakend-jose/validator": {
                     "alg": "RS256",
@@ -1002,15 +1378,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://media-service:8000"],
+                    "host": [
+                        "http://media-service:8000"
+                    ],
                     "url_pattern": "/api/v1/me/assets/{asset_id}",
                     "encoding": "no-op"
                 }
@@ -1039,15 +1426,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://response-service:8000"],
+                    "host": [
+                        "http://response-service:8000"
+                    ],
                     "url_pattern": "/response/tasks/{task_id}/responses?project_id={project_id}",
                     "encoding": "no-op"
                 }
@@ -1076,15 +1474,26 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
-                        ["sub", "X-User-Id"],
-                        ["preferred_username", "X-Username"],
-                        ["realm_access/roles", "X-User-Roles"]
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
                     ]
                 }
             },
             "backend": [
                 {
-                    "host": ["http://response-service:8000"],
+                    "host": [
+                        "http://response-service:8000"
+                    ],
                     "url_pattern": "/response/responses/{response_id}/status",
                     "encoding": "no-op",
                     "method": "PATCH"
@@ -1114,6 +1523,52 @@
                     "cache": true,
                     "cache_duration": 60,
                     "propagate_claims": [
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
+                    ]
+                }
+            },
+            "backend": [
+                {
+                    "host": [
+                        "http://response-service:8000"
+                    ],
+                    "url_pattern": "/response/responses?task_id={task_id}&project_id={project_id}",
+                    "encoding": "no-op"
+                }
+            ]
+        },
+        {
+            "endpoint": "/project/{project_id}/post/{post_id}/comments",
+            "method": "GET",
+            "output_encoding": "no-op",
+            "input_headers": [
+                "Authorization"
+            ],
+            "headers_to_pass": [
+                "Authorization",
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "issuer": "http://localhost:8082/realms/myrealm",
+                    "cache": true,
+                    "cache_duration": 60,
+                    "propagate_claims": [
                         ["sub", "X-User-Id"],
                         ["preferred_username", "X-Username"],
                         ["realm_access/roles", "X-User-Roles"]
@@ -1122,9 +1577,59 @@
             },
             "backend": [
                 {
-                    "host": ["http://response-service:8000"],
-                    "url_pattern": "/response/responses?task_id={task_id}&project_id={project_id}",
-                    "encoding": "no-op"
+                    "host": ["http://project-service:8000"],
+                    "url_pattern": "/project/{project_id}/post/{post_id}/comments",
+                    "encoding": "no-op",
+                    "method": "GET"
+                }
+            ]
+        },
+        {
+            "endpoint": "/project/{project_id}/post/{post_id}/comments",
+            "method": "POST",
+            "output_encoding": "no-op",
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ],
+            "headers_to_pass": [
+                "Authorization",
+                "Content-Type",
+                "X-User-Id",
+                "X-Username",
+                "X-User-Roles"
+            ],
+            "extra_config": {
+                "github_com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+                    "jwk_url": "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs",
+                    "issuer": "http://localhost:8082/realms/myrealm",
+                    "cache": true,
+                    "cache_duration": 60,
+                    "propagate_claims": [
+                        [
+                            "sub",
+                            "X-User-Id"
+                        ],
+                        [
+                            "preferred_username",
+                            "X-Username"
+                        ],
+                        [
+                            "realm_access/roles",
+                            "X-User-Roles"
+                        ]
+                    ]
+                }
+            },
+            "backend": [
+                {
+                    "host": [
+                        "http://project-service:8000"
+                    ],
+                    "url_pattern": "/project/{project_id}/post/{post_id}/comments",
+                    "encoding": "no-op",
+                    "method": "POST"
                 }
             ]
         }
