@@ -91,6 +91,25 @@
             ]
         },
         {
+            "endpoint": "/api/v1/auth/password-change",
+            "method": "POST",
+            "output_encoding": "no-op",
+            "input_headers": [
+                "Authorization",
+                "Cookie",
+                "Content-Type"
+            ],
+            "backend": [
+                {
+                    "host": [
+                        "http://auth-service:8000"
+                    ],
+                    "url_pattern": "/api/v1/auth/password-change",
+                    "encoding": "no-op"
+                }
+            ]
+        },
+        {
             "endpoint": "/api/v1/auth/reset-password",
             "method": "POST",
             "output_encoding": "no-op",
