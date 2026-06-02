@@ -1596,8 +1596,8 @@
             },
             "backend": [
                 {
-                    "host": ["http://project-service:8000"],
-                    "url_pattern": "/project/{project_id}/post/{post_id}/comments",
+                    "host": ["http://response-service:8000"],
+                    "url_pattern": "/response/posts/{post_id}/comments",
                     "encoding": "no-op",
                     "method": "GET"
                 }
@@ -1644,9 +1644,9 @@
             "backend": [
                 {
                     "host": [
-                        "http://project-service:8000"
+                        "http://response-service:8000"
                     ],
-                    "url_pattern": "/project/{project_id}/post/{post_id}/comments",
+                    "url_pattern": "/response/posts/{post_id}/comments",
                     "encoding": "no-op",
                     "method": "POST"
                 }
